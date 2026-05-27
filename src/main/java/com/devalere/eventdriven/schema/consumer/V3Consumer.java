@@ -14,11 +14,11 @@ import java.util.Map;
 
 /**
  * Consumer V3 : connait { orderId, customer, amount, email, priority }.
- *
- * - Recoit un event V1 -> email=null, priority=null = BACKWARD compatible.
- * - Recoit un event V2 -> priority=null = BACKWARD compatible.
- * - Recoit un event V3 -> tout est la = parfait.
- * - Recoit un event BREAKING -> customer manquant = ECHEC.
+ * <p>
+ * - Recoit un event V1 → email=null, priority=null = BACKWARD compatible.
+ * - Recoit un event V2 → priority=null = BACKWARD compatible.
+ * - Recoit un event V3 → tout est la = parfait.
+ * - Recoit un event BREAKING → customer manquant = ECHEC.
  */
 @Component
 @Slf4j

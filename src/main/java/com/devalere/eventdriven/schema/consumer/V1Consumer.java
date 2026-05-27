@@ -3,6 +3,7 @@ package com.devalere.eventdriven.schema.consumer;
 import com.devalere.eventdriven.schema.config.KafkaConfig;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -14,17 +15,18 @@ import java.util.Map;
 
 /**
  * Consumer V1 : ne connait que { orderId, customer, amount }.
- *
- * - Recoit un event V1 -> tout va bien.
- * - Recoit un event V2 (avec email) -> IGNORE le champ inconnu = FORWARD compatible.
- * - Recoit un event V3 (avec email + priority) -> IGNORE les champs inconnus = FORWARD compatible.
- * - Recoit un event BREAKING (customer renomme, amount supprime) -> ECHEC = BREAKING CHANGE.
+ * <p>
+ * - Reçoit un event V1 → tout va bien.
+ * - Reçoit un event V2 (avec email) → IGNORE le champ inconnu = FORWARD compatible.
+ * - Reçoit un event V3 (avec email + priority) → IGNORE les champs inconnus = FORWARD compatible.
+ * - Reçoit un event BREAKING (customer renomme, amount supprime) → ECHEC = BREAKING CHANGE.
  */
 @Component
 @Slf4j
 public class V1Consumer {
 
     private final ObjectMapper mapper = new ObjectMapper();
+    @Getter
     private final List<Map<String, Object>> processedEvents = new ArrayList<>();
 
     @KafkaListener(topics = KafkaConfig.ORDER_TOPIC, groupId = "v1-consumer-group")
@@ -83,7 +85,4 @@ public class V1Consumer {
         }
     }
 
-    public List<Map<String, Object>> getProcessedEvents() {
-        return processedEvents;
-    }
 }

@@ -11,8 +11,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Producer qui publie des events en differentes versions de schema.
- * Utilise du JSON brut (String) pour montrer concretement ce qui circule sur Kafka.
+ * Producer qui publie des events en différentes versions de schema.
+ * Utilise du JSON brut (String) pour montrer concrètement ce qui circule sur Kafka.
  */
 @Service
 @Slf4j
